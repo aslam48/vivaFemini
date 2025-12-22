@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import FirstImg from "../assets/firstImg.png"
+import Start from "../assets/foward.png"
 
 const CycleCalendar: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(14);
@@ -164,7 +166,7 @@ const CycleCalendar: React.FC = () => {
                   Gift your friend 30 days of free Premium to help them thrive
                 </p>
               </div>
-              <div className="text-3xl">🎉</div>
+              <div className="text-3xl">📣</div>
             </div>
           </div>
 
@@ -177,18 +179,19 @@ const CycleCalendar: React.FC = () => {
               Hi! Did you take your pregnancy test?
             </h3>
             <div className="flex justify-around gap-2">
-              <button className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-pink-500 flex items-center justify-center text-white hover:bg-pink-600 transition-colors">
-                <span className="text-xl">📋</span>
-              </button>
-              <button className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-pink-500 flex items-center justify-center text-white hover:bg-pink-600 transition-colors">
-                <span className="text-xl">📅</span>
-              </button>
-              <button className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-pink-500 flex items-center justify-center text-white hover:bg-pink-600 transition-colors">
-                <span className="text-xl">📝</span>
-              </button>
-              <button className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-pink-500 flex items-center justify-center text-white hover:bg-pink-600 transition-colors">
-                <span className="text-xl">📊</span>
-              </button>
+              <div>
+                <img src={FirstImg} />
+              </div>
+               <div>
+                <img src={Start} />
+              </div>
+               <div>
+                <img src={Start} />
+              </div>
+               <div>
+                <img src={Start} />
+              </div>
+
             </div>
           </div>
         </div>
