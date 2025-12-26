@@ -1,0 +1,100 @@
+import { useQuery } from '@tanstack/react-query'
+import { PublicAxios } from '../utils/axiosConfig/axiosConfig'
+const user_ID = '694da85b653446a1a6264c21'
+
+
+export const useGetUser = () => {
+  const {
+    data: dashboardData,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ['users'],
+    queryFn: async () => {
+      const response = await PublicAxios.get('/users')
+      return response.data
+    },
+    refetchOnWindowFocus: false,
+  })
+
+  return { dashboardData, isLoading, refetch }
+}
+
+
+export const useGetDailyLogs = () => {
+  const {
+    data: DailyLogs,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ['logs'],
+    queryFn: async () => {
+      const response = await PublicAxios.get(`daily-logs?userId=${user_ID}`)
+      return response.data
+    },
+    refetchOnWindowFocus: false,
+  })
+
+  return { DailyLogs, isLoading, refetch }
+}
+
+
+export const useSymptom_Frequency = () => {
+  const {
+    data: SymptomData,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ['Symptom_Frequency'],
+    queryFn: async () => {
+      const response = await PublicAxios.get(`health-reports/symptoms?userId=${user_ID}&startDate=2025-12-01&endDate=2025-12-31`)
+      return response.data
+    },
+    refetchOnWindowFocus: false,
+  })
+
+  return { SymptomData, isLoading, refetch }
+}
+
+
+
+export const useFlowPaattern = () => {
+  const {
+    data: FlowData,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ['FlowPattern'],
+    queryFn: async () => {
+      const response = await PublicAxios.get(`health-reports/flow-pattern?userId=${user_ID}&startDate=2025-12-01&endDate=2025-12-31`)
+      return response.data
+    },
+    refetchOnWindowFocus: false,
+  })
+
+  return { FlowData, isLoading, refetch }
+}
+
+
+export const useHealthReport = () => {
+  const {
+    data: HealthData,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ['HealthReport'],
+    queryFn: async () => {
+      const response = await PublicAxios.get(`health-reports/monthly?userId=${user_ID}&month=12&year=2025`)
+      return response.data
+    },
+    refetchOnWindowFocus: false,
+  })
+
+  return { HealthData, isLoading, refetch }
+}
+
+
+
+
+
+
