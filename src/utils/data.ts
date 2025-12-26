@@ -70,3 +70,21 @@ export const sexualHealthOptions = [
     { label: 'Energetic', emoji: '⚡' },
   ];
   
+
+   // Dummy data - replace with your actual data later
+  export const dummyData = [
+    { date: 'Oct 18th', time: '01:57:25 am', topSymptom: 'Physical Pain', totalSymptoms: '6/10', note: 'After lunch...' },
+    { date: 'Oct 18th', time: '01:57:25 am', topSymptom: 'Physical Pain', totalSymptoms: '6/10', note: 'After lunch' },
+    { date: 'Oct 18th', time: '01:57:25 am', topSymptom: 'Physical Pain', totalSymptoms: '6/10', note: 'After lunch' },
+    { date: 'Oct 18th', time: '01:57:26 am', topSymptom: 'Physical Pain', totalSymptoms: '6/10', note: 'After lunch' },
+    { date: 'Oct 18th', time: '01:57:26 am', topSymptom: 'Physical Pain', totalSymptoms: '6/10', note: 'After lunch' },
+    { date: 'Oct 18th', time: '01:57:29 am', topSymptom: 'Physical Pain', totalSymptoms: '6/10', note: 'After lunch' },
+    { date: 'Oct 18th', time: '01:57:29 am', topSymptom: 'Physical Pain', totalSymptoms: '6/10', note: 'After lunch' },
+    { date: 'Oct 18th', time: '01:57:25 am', topSymptom: 'Physical Pain', totalSymptoms: '6/10', note: 'After lunch' },
+    { date: 'Oct 18th', time: '01:57:32 am', topSymptom: 'Physical Pain', totalSymptoms: '6/10', note: 'After lunch' },
+    { date: 'Oct 18th', time: '01:57:32 am', topSymptom: 'Physical Pain', totalSymptoms: '6/10', note: 'After lunch' },
+    { date: 'Oct 18th', time: '01:57:25 am', topSymptom: 'Physical Pain', totalSymptoms: '6/10', note: 'After lunch' },
+    { date: 'Oct 18th', time: '01:57:25 am', topSymptom: 'Physical Pain', totalSymptoms: '6/10', note: 'After lunch' },
+  ];
+
+

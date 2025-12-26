@@ -39,4 +39,44 @@ export const useGetDailyLogs = () => {
 }
 
 
+export const useSymptom_Frequency = () => {
+  const {
+    data: SymptomData,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ['Symptom_Frequency'],
+    queryFn: async () => {
+      const response = await PublicAxios.get(`health-reports/symptoms?userId=${user_ID}&startDate=2025-12-01&endDate=2025-12-31`)
+      return response.data
+    },
+    refetchOnWindowFocus: false,
+  })
+
+  return { SymptomData, isLoading, refetch }
+}
+
+
+
+export const useFlowPaattern = () => {
+  const {
+    data: FlowData,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ['FlowPattern'],
+    queryFn: async () => {
+      const response = await PublicAxios.get(`health-reports/flow-pattern?userId=${user_ID}&startDate=2025-12-01&endDate=2025-12-31`)
+      return response.data
+    },
+    refetchOnWindowFocus: false,
+  })
+
+  return { FlowData, isLoading, refetch }
+}
+
+
+
+
+
 

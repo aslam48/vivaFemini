@@ -7,7 +7,7 @@ import Doctor from "../../../../assets/doctor.jpg";
 
 const CycleHighlight: React.FC = () => {
   return (
-    <div className="px-4 sm:px-0 w-full lg:max-w-1/2">
+    <div className="px-4 sm:px-0 w-full lg:max-w-1/2 mb-10">
       {/* Header */}
       <div className="text-center mb-6 sm:mb-8">
         <h1 className="text-2xl sm:text-3xl font-bold text-pink-500 mb-2">
