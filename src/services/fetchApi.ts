@@ -76,6 +76,24 @@ export const useFlowPaattern = () => {
 }
 
 
+export const useHealthReport = () => {
+  const {
+    data: HealthData,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ['HealthReport'],
+    queryFn: async () => {
+      const response = await PublicAxios.get(`health-reports/monthly?userId=${user_ID}&month=12&year=2025`)
+      return response.data
+    },
+    refetchOnWindowFocus: false,
+  })
+
+  return { HealthData, isLoading, refetch }
+}
+
+
 
 
 
