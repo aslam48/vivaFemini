@@ -16,7 +16,7 @@ const HistoricalTable: React.FC = () => {
   const tableRef = useRef(null);
   const { HealthData, isLoading } = useHealthReport();
 
-  // Format date to display format
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     const day = date.getDate();
@@ -24,7 +24,7 @@ const HistoricalTable: React.FC = () => {
     return `${day} ${month}`;
   };
 
-  // Format time to display format
+
   const formatTime = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleTimeString('en-US', { 
@@ -34,26 +34,26 @@ const HistoricalTable: React.FC = () => {
     });
   };
 
-  // Get historical logs from API data
+ 
   const historicalLogs = HealthData?.historicalLogs || [];
 
-  // Download PDF function
+
   const downloadPDF = () => {
     const doc = new jsPDF();
     
-    // Add title
+
     doc.setFontSize(18);
     doc.text('Historical Cycle Data', 14, 20);
     
-    // Add month
+ 
     doc.setFontSize(12);
     doc.text(selectedMonth, 14, 30);
     
-    // Add date generated
+    
     doc.setFontSize(10);
     doc.text(`Generated: ${new Date().toLocaleDateString()}`, 14, 38);
     
-    // Prepare table data
+ 
     const tableData = historicalLogs.map((row: HistoricalLog) => [
       formatDate(row.date),
       formatTime(row.date),
@@ -62,14 +62,14 @@ const HistoricalTable: React.FC = () => {
       row.note || '—'
     ]);
     
-    // Add table
+   
     autoTable(doc, {
       startY: 45,
       head: [['Date', 'Time', 'Top Symptom', 'Total Symptoms', 'Note']],
       body: tableData,
       theme: 'striped',
       headStyles: {
-        fillColor: [236, 72, 153], // Pink color
+        fillColor: [236, 72, 153],
         textColor: 255,
         fontStyle: 'bold'
       },
@@ -78,11 +78,11 @@ const HistoricalTable: React.FC = () => {
         cellPadding: 3
       },
       columnStyles: {
-        4: { cellWidth: 50 } // Note column wider
+        4: { cellWidth: 50 } 
       }
     });
     
-    // Add summary if available
+   
     if (HealthData?.summary) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const finalY = (doc as any).lastAutoTable?.finalY || 45;
@@ -126,7 +126,7 @@ const HistoricalTable: React.FC = () => {
           </div>
         </div>
 
-        {/* Loading State */}
+       
         {isLoading && (
           <div className="bg-white rounded-lg shadow-sm p-12 text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-500 mx-auto"></div>
@@ -134,7 +134,7 @@ const HistoricalTable: React.FC = () => {
           </div>
         )}
 
-        {/* Table */}
+        
         {!isLoading && (
           <>
             <div className="bg-white rounded-lg shadow-sm overflow-hidden">
@@ -198,7 +198,7 @@ const HistoricalTable: React.FC = () => {
               </div>
             </div>
 
-            {/* Mobile-friendly scroll indicator */}
+          
             <div className="mt-2 text-center text-xs text-gray-500 sm:hidden">
               ← Scroll horizontally to view all columns →
             </div>
