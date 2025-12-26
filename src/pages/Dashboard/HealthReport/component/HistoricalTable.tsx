@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { Download, FileText } from 'lucide-react';
 import { useHealthReport } from '../../../../services/fetchApi';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 interface HistoricalLog {
   date: string;
@@ -35,6 +37,66 @@ const HistoricalTable: React.FC = () => {
   // Get historical logs from API data
   const historicalLogs = HealthData?.historicalLogs || [];
 
+  // Download PDF function
+  const downloadPDF = () => {
+    const doc = new jsPDF();
+    
+    // Add title
+    doc.setFontSize(18);
+    doc.text('Historical Cycle Data', 14, 20);
+    
+    // Add month
+    doc.setFontSize(12);
+    doc.text(selectedMonth, 14, 30);
+    
+    // Add date generated
+    doc.setFontSize(10);
+    doc.text(`Generated: ${new Date().toLocaleDateString()}`, 14, 38);
+    
+    // Prepare table data
+    const tableData = historicalLogs.map((row: HistoricalLog) => [
+      formatDate(row.date),
+      formatTime(row.date),
+      row.topSymptom,
+      row.totalSymptoms,
+      row.note || '—'
+    ]);
+    
+    // Add table
+    autoTable(doc, {
+      startY: 45,
+      head: [['Date', 'Time', 'Top Symptom', 'Total Symptoms', 'Note']],
+      body: tableData,
+      theme: 'striped',
+      headStyles: {
+        fillColor: [236, 72, 153], // Pink color
+        textColor: 255,
+        fontStyle: 'bold'
+      },
+      styles: {
+        fontSize: 9,
+        cellPadding: 3
+      },
+      columnStyles: {
+        4: { cellWidth: 50 } // Note column wider
+      }
+    });
+    
+    // Add summary if available
+    if (HealthData?.summary) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const finalY = (doc as any).lastAutoTable?.finalY || 45;
+      doc.setFontSize(10);
+      doc.text('Summary:', 14, finalY + 15);
+      doc.setFontSize(9);
+      const splitSummary = doc.splitTextToSize(HealthData.summary, 180);
+      doc.text(splitSummary, 14, finalY + 22);
+    }
+    
+    // Save the PDF
+    doc.save(`cycle-data-${selectedMonth.replace(' ', '-')}.pdf`);
+  };
+
   return (
     <div className="min-h-screen w-full mt-6">
       <div className="w-full max-w-full mx-auto">
@@ -54,8 +116,9 @@ const HistoricalTable: React.FC = () => {
               </select>
             </div>
             <button 
-              // onClick={downloadPDF}
-              className="bg-pink-500 hover:bg-pink-600 text-white px-4 sm:px-6 py-2.5 rounded-full flex items-center justify-center gap-2 transition-colors w-full sm:w-auto"
+              onClick={downloadPDF}
+              disabled={isLoading || historicalLogs.length === 0}
+              className="bg-pink-500 hover:bg-pink-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 sm:px-6 py-2.5 rounded-full flex items-center justify-center gap-2 transition-colors w-full sm:w-auto"
             >
               <Download size={18} />
               Download PDF
